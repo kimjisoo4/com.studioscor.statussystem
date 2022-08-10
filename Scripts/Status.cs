@@ -121,13 +121,27 @@ namespace KimScor.StatusSystem
 
             SetCurrentPoint(point);
         }
+
+        public bool TryConsumeCost(EConsumeType consumeType, float value)
+        {
+            if (CanConsumeCost(consumeType, value))
+            {
+                ConsumeCost(consumeType, value);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void ConsumeCost(EConsumeType consumeType, float value)
         {
             float point = _CurrentPoint - CurrentConsumeCost(consumeType, value);
 
             SetCurrentPoint(point);
         }
-
 
         public bool CanConsumeCost(EConsumeType consumeType, float value)
         {
