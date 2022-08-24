@@ -5,7 +5,7 @@ namespace KimScor.StatusSystem
 {
 
 
-    public class StatusUI_Image : StatusUIModifier
+    public partial class StatusUI_Image : StatusUIModifier
     {
         [SerializeField] private Image _Image;
 
@@ -21,6 +21,7 @@ namespace KimScor.StatusSystem
 
             _Image = GetComponent<Image>();
         }
+
 #endif
     }
 }

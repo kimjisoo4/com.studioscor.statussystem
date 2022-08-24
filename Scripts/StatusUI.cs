@@ -18,6 +18,9 @@ namespace KimScor.StatusSystem
         }
         private void OnDisable()
         {
+            if (!Application.isPlaying)
+                return;
+
             SetStatusSystem(null);
         }
 
@@ -34,6 +37,9 @@ namespace KimScor.StatusSystem
         }
         private void Setup()
         {
+            if (!_StatusSystem)
+                _StatusSystem = GetComponentInParent<StatusSystem>();
+
             if (_StatusSystem != null)
             {
                 _Status = _StatusSystem.GetOrCreateValue(_Tag);

@@ -16,11 +16,13 @@ namespace KimScor.StatusSystem
 
         private StatusTag _StatusTag = null;
 
+        private float _NormalizedValue;
         private bool _IsFullPoint;
         private bool _IsEmptyPoint;
         public string Name => _Name;
         public float MaxPoint => _MaxPoint;
         public float CurrentPoint => _CurrentPoint;
+        public float NormalizedValue => _NormalizedValue;
 
         public StatusTag StatusTag => _StatusTag;
         public bool IsFullPoint => _IsFullPoint;
@@ -85,6 +87,8 @@ namespace KimScor.StatusSystem
 
             if (prevPoint != _CurrentPoint)
             {
+                _NormalizedValue = _CurrentPoint / _MaxPoint;
+
                 OnChangedPoint?.Invoke(this, _CurrentPoint, prevPoint);
 
                 if (CurrentPoint >= MaxPoint)
@@ -139,6 +143,11 @@ namespace KimScor.StatusSystem
         public void ConsumeCost(EConsumeType consumeType, float value)
         {
             float point = _CurrentPoint - CurrentConsumeCost(consumeType, value);
+
+            if (point < 0.1f)
+            {
+                point = 0f;
+            }
 
             SetCurrentPoint(point);
         }
