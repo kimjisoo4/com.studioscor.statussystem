@@ -9,9 +9,35 @@ namespace KimScor.StatusSystem
         public delegate void StatusEventHandler(StatusSystem statusSystem, Status status);
         #endregion
 
-        public Dictionary<StatusTag, Status> Statuses = new Dictionary<StatusTag, Status>();
+        private Dictionary<StatusTag, Status> _Statuses = new Dictionary<StatusTag, Status>();
+
+        private bool _WasSetup = false;
+        public IReadOnlyDictionary<StatusTag, Status> Statuses
+        {
+            get
+            {
+                Setup();
+
+                return _Statuses;
+            }
+        }
 
         public event StatusEventHandler OnAddedStatus;
+
+        private void Awake()
+        {
+            Setup();
+        }
+
+        protected virtual void Setup()
+        {
+            if (_WasSetup)
+                return;
+
+            _WasSetup = true;
+
+            _Statuses = new();
+        }
 
         public Status CreateOrSetValue(StatusTag Tag, float minValue, float maxValue)
         {
@@ -19,7 +45,7 @@ namespace KimScor.StatusSystem
             {
                 value = new Status(Tag, minValue, maxValue);
 
-                Statuses.Add(Tag, value);
+                _Statuses.Add(Tag, value);
 
                 OnAddStatus(value);
             }
@@ -57,7 +83,7 @@ namespace KimScor.StatusSystem
             {
                 value = new Status(Tag, minValue, maxValue);
 
-                Statuses.Add(Tag, value);
+                _Statuses.Add(Tag, value);
 
                 OnAddStatus(value);
 
@@ -70,7 +96,7 @@ namespace KimScor.StatusSystem
         }
 
         #region Callback
-        public void OnAddStatus(Status status)
+        protected void OnAddStatus(Status status)
         {
             OnAddedStatus?.Invoke(this, status);
         }
