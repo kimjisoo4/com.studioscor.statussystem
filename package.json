@@ -1,6 +1,6 @@
 {
   "name": "com.studioscor.statussystem",
   "version": "0.0.1",
-  "displayName": "StudioScor - Status System",
-  "description": "GameplayStatus System - StudioScor"
+  "displayName": "StudioScor - StatusSystem",
+  "description": "StatusSystem - StudioScor"
 }
