@@ -3,7 +3,7 @@
 Tag 를 통해 범위가 있는 float 값을 관리하는 시스템.
 
 
-StatusSystemComponent에서 StatTag 를 통해 Status를 등록하거나 가져와서 사용한다.
+StatusSystemComponent에서 StatusTag 를 통해 Status를 등록하거나 가져와서 사용한다.
 
 값은 0 ~ MaxValue 로 구성되어 있고, 현재 값의 상태에 따라 이벤트가 발생한다.
 
