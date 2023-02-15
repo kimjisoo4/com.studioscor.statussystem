@@ -1,5 +1,6 @@
 ﻿#if SCOR_ENABLE_VISUALSCRIPTING
 using Unity.VisualScripting;
+using System;
 
 namespace StudioScor.StatusSystem.VisualScripting
 {
@@ -103,6 +104,7 @@ namespace StudioScor.StatusSystem.VisualScripting
 
             base.StartListening(stack);
         }
+
 
         public override void StartListening(GraphStack stack)
         {

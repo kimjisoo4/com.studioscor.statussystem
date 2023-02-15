@@ -13,33 +13,17 @@ namespace StudioScor.StatusSystem
         [SerializeField] private InitializationStatuses _InitializationStatuses;
         private Dictionary<StatusTag, Status> _Statuses = new Dictionary<StatusTag, Status>();
 
-        private bool _WasSetup = false;
-        public IReadOnlyDictionary<StatusTag, Status> Statuses
-        {
-            get
-            {
-                if(!_WasSetup)
-                    Setup();
-
-                return _Statuses;
-            }
-        }
+        public IReadOnlyDictionary<StatusTag, Status> Statuses => _Statuses;
 
         public event StatusEventHandler OnGrantedStatus;
 
         private void Awake()
         {
-            if(!_WasSetup)
-                Setup();
+            Setup();
         }
 
         protected void Setup()
         {
-            if (_WasSetup)
-                return;
-
-            _WasSetup = true;
-
             _Statuses = new();
 
             SetupInitializationStatuses();

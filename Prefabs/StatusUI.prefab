@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 389582015948695013}
   - component: {fileID: 389582015948695014}
   - component: {fileID: 389582015948695015}
-  - component: {fileID: 389582015948695012}
+  - component: {fileID: 8405151317495461194}
   m_Layer: 5
   m_Name: Status_Image
   m_TagString: Untagged
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &389582015948695012
+--- !u!114 &8405151317495461194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,10 +162,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 389582015948695010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1c54b8edd6cce0439018eea8d9af346, type: 3}
+  m_Script: {fileID: 11500000, guid: c6812c256cc364d4dac8fa1f99ba4e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _StatusUI: {fileID: 923900771696028549}
+  _StatusUI: {fileID: 7766356480552339776}
   _Image: {fileID: 389582015948695015}
 --- !u!1 &389582016353603447
 GameObject:
@@ -176,7 +176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 389582016353603446}
-  - component: {fileID: 923900771696028549}
+  - component: {fileID: 7766356480552339776}
   m_Layer: 5
   m_Name: StatusUI
   m_TagString: Untagged
@@ -208,7 +208,7 @@ RectTransform:
   m_AnchoredPosition: {x: 10, y: 10}
   m_SizeDelta: {x: 200, y: 15}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &923900771696028549
+--- !u!114 &7766356480552339776
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 389582016353603447}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b37755632abfb247b45c5e2f9430b7b, type: 3}
+  m_Script: {fileID: 11500000, guid: e86764868b2edfb46bc6438840f56cb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _StatusSystem: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 389582016619003407}
   - component: {fileID: 389582016619003505}
   - component: {fileID: 389582016619003406}
-  - component: {fileID: 389582016619003504}
+  - component: {fileID: 2187906190559854329}
   m_Layer: 5
   m_Name: Status_Text
   m_TagString: Untagged
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Text: '999 / 999
 
 '
---- !u!114 &389582016619003504
+--- !u!114 &2187906190559854329
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,10 +315,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 389582016619003404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65c37d366753fe249a8fe1f5161052a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 99f9e1bf8e02cca4f86938d3c564be4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _StatusUI: {fileID: 923900771696028549}
+  _StatusUI: {fileID: 7766356480552339776}
   _Text: {fileID: 389582016619003406}
 --- !u!1 &6120288518919163613
 GameObject:
@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 4988000269552154024}
   - component: {fileID: 7493116685873540392}
   - component: {fileID: 8128806972669751643}
-  - component: {fileID: 3925200220048268144}
+  - component: {fileID: 2294720416739287011}
   m_Layer: 5
   m_Name: Status_Image_DelayedBar
   m_TagString: Untagged
@@ -397,7 +397,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3925200220048268144
+--- !u!114 &2294720416739287011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -406,10 +406,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6120288518919163613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db9b1a047d26f64fa7d8ea0fbc1b2ac, type: 3}
+  m_Script: {fileID: 11500000, guid: ce51ddd71cede17479b945dbad7b2408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _StatusUI: {fileID: 923900771696028549}
+  _StatusUI: {fileID: 7766356480552339776}
   _Image: {fileID: 8128806972669751643}
   _Delay: 0.2
   _Speed: 5

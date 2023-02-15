@@ -8,9 +8,9 @@ namespace StudioScor.StatusSystem
     [CreateAssetMenu(fileName = "new Status", menuName = "StudioScor/Attribute System/new Status")]
     public class StatusTag : ScriptableObject
     {
-        [Header("[Name]")]
+        [Header("[ Name ]")]
         [SerializeField] private string _Name;
-        [Header("[Text]")]
+        [Header("[ Description ]")]
         [SerializeField] private string _Description;
 
         public string Name => _Name;

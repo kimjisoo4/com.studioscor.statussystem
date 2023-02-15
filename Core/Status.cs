@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
+using StudioScor.Utilities;
 
 namespace StudioScor.StatusSystem
 {
-    [System.Serializable]
     public class Status
     {
         #region Event
@@ -10,22 +10,17 @@ namespace StudioScor.StatusSystem
         public delegate void StatusChangedStateHandler(Status status, EStatusState currentState, EStatusState prevState);
         #endregion
 
-        [Header(" [ Status ] ")]
-        [SerializeField] private string _Name;
-        [Space(5f)]
-        [SerializeField] private StatusTag _Tag;
-        [Space(5f)]
-        [SerializeField] private float _MaxValue;
-        [SerializeField] private float _CurrentValue;
+        private readonly StatusTag _Tag;
 
+        private float _MaxValue;
+        private float _CurrentValue;
         private float _NormalizedValue;
         private EStatusState _CurrentState;
 
-        public string Name => _Name;
+        public StatusTag Tag => _Tag;
         public float MaxValue => _MaxValue;
         public float CurrentValue => _CurrentValue;
         public float NormalizedValue => _NormalizedValue;
-        public StatusTag Tag => _Tag;
         public EStatusState CurrentState => _CurrentState;
 
         public event StatusChangedValueHandler OnChangedMaxValue;
@@ -35,7 +30,6 @@ namespace StudioScor.StatusSystem
 
         public Status(StatusTag statusTag, float maxValue, float currentValue, bool useRate = false)
         {
-            _Name = statusTag.Name;
             _Tag = statusTag;
 
             float value = useRate ? maxValue * currentValue : currentValue;
@@ -123,10 +117,10 @@ namespace StudioScor.StatusSystem
                 case ECalculateType.Absolute:
                     calcValue = value;
                     break;
-                case ECalculateType.RateMax:
+                case ECalculateType.RatioMaxValue:
                     calcValue = value * MaxValue;
                     break;
-                case ECalculateType.RateCurret:
+                case ECalculateType.RatioCurrentValue:
                     calcValue = value * CurrentValue;
                     break;
                 default:

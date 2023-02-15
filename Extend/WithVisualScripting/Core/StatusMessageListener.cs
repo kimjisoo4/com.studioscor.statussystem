@@ -8,7 +8,7 @@ namespace StudioScor.StatusSystem.VisualScripting
     [DisableAnnotation]
     [AddComponentMenu("")]
     [IncludeInSettings(false)]
-    public class StatusMessageListener : MonoBehaviour
+    public class StatusMessageListener : MessageListener
     {
         private StatusSystemComponent _StatusSystem;
         private List<StatusTag> _StatusTags;
