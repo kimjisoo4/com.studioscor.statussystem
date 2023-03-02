@@ -51,13 +51,13 @@ namespace StudioScor.StatusSystem
 
             _MaxValue = Mathf.Max(newValue, 0);
 
-            if (prevMaxValue != _CurrentValue)
+            if (!_MaxValue.SafeEquals(prevMaxValue))
             {
-                Callback_OnChangedMaxValue( prevMaxValue);
+                Callback_OnChangedMaxValue(prevMaxValue);
 
                 if (useRateChangeCurrentValue)
                 {
-                    if (_MaxValue > prevMaxValue)
+                    if (_MaxValue < prevMaxValue)
                     {
                         SetCurrentValue(_CurrentValue * (_MaxValue / prevMaxValue));
                     }
@@ -75,7 +75,7 @@ namespace StudioScor.StatusSystem
 
             _CurrentValue = Mathf.Clamp(newValue, 0, _MaxValue);
 
-            if (prevValue != _CurrentValue)
+            if (!_CurrentValue.SafeEquals(prevValue))
             {
                 _NormalizedValue = _CurrentValue / _MaxValue;
 

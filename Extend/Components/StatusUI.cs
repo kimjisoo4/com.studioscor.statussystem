@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace StudioScor.StatusSystem
 {
-
     public class StatusUI : MonoBehaviour
     {
         [SerializeField] private StatusSystemComponent _StatusSystem;
