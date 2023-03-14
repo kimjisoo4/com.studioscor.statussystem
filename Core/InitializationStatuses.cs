@@ -17,7 +17,7 @@ namespace StudioScor.StatusSystem
                 if (_Statuses[i].Tag == null)
                     return;
 
-                float currentValue = _Statuses[i].UseRate ? _Statuses[i].MaxValue * _Statuses[i].RateValue : _Statuses[i].CurrentValue;
+                float currentValue = _Statuses[i].UseRate ? _Statuses[i].MaxValue * _Statuses[i].CurrentValue : _Statuses[i].CurrentValue;
 
                 _Statuses[i].HeaderName = _Statuses[i].Tag.Name + 
                     " [" + currentValue + " / " + _Statuses[i].MaxValue + "]";

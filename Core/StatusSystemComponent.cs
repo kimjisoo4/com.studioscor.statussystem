@@ -46,7 +46,7 @@ namespace StudioScor.StatusSystem
 
             foreach (var initStatus in _InitializationStatuses.Statuses)
             {
-                SetOrCreateStatus(initStatus.Tag, initStatus.MaxValue, initStatus.MaxValue, initStatus.UseRate);
+                SetOrCreateStatus(initStatus.Tag, initStatus.MaxValue, initStatus.CurrentValue, initStatus.UseRate);
             }
         }
 
@@ -62,7 +62,7 @@ namespace StudioScor.StatusSystem
             }
             else
             {
-                status.SetValue(maxValue, currentValue);
+                status.SetValue(maxValue, currentValue, useRate);
             }
 
             return status;

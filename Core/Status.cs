@@ -57,7 +57,7 @@ namespace StudioScor.StatusSystem
 
                 if (useRateChangeCurrentValue)
                 {
-                    if (_MaxValue < prevMaxValue)
+                    if (_MaxValue > prevMaxValue)
                     {
                         SetCurrentValue(_CurrentValue * (_MaxValue / prevMaxValue));
                     }
