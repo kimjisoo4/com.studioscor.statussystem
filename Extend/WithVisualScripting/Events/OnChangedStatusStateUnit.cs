@@ -11,6 +11,12 @@ namespace StudioScor.StatusSystem.VisualScripting
         protected override string HookName => StatusSystemWithVisualScripting.STATUS_ON_CHANGED_STATE;
 
         [DoNotSerialize]
+        [PortLabel("StatusTag")]
+        [PortLabelHidden]
+        public ValueInput StatusTag { get; private set; }
+
+
+        [DoNotSerialize]
         [PortLabel("Status")]
         public ValueOutput Status;
 
@@ -26,6 +32,8 @@ namespace StudioScor.StatusSystem.VisualScripting
         {
             base.Definition();
 
+            StatusTag = ValueInput<StatusTag>(nameof(StatusTag), null);
+
             Status = ValueOutput<Status>(nameof(Status));
             CurrentState = ValueOutput<EStatusState>(nameof(CurrentState));
             PrevState = ValueOutput<EStatusState>(nameof(PrevState));
@@ -38,6 +46,14 @@ namespace StudioScor.StatusSystem.VisualScripting
             flow.SetValue(Status, changedStatusState.Status);
             flow.SetValue(CurrentState, changedStatusState.CurrentState);
             flow.SetValue(PrevState, changedStatusState.PrevState);
+        }
+
+        protected override bool ShouldTrigger(Flow flow, ChangedStatusState changedStatusValue)
+        {
+            if (!base.ShouldTrigger(flow, changedStatusValue))
+                return false;
+
+            return flow.GetValue<StatusTag>(StatusTag) == changedStatusValue.Status.Tag;
         }
     }
 }

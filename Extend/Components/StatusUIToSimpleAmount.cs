@@ -8,7 +8,7 @@ namespace StudioScor.StatusSystem
         [Header(" [ Status UI To Simple Amount ] ")]
         [SerializeField] private StatusSystemComponent _StatusSystem;
         [SerializeField] private StatusTag _StatusTag;
-        [SerializeField] private SimpleAmount _SImpleAmount;
+        [SerializeField] private SimpleAmountComponent _SImpleAmount;
 
         private void Reset()
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace StudioScor.StatusSystem
 {
 
-    [CreateAssetMenu(fileName = "new Status", menuName = "StudioScor/Attribute System/new Status")]
+    [CreateAssetMenu(fileName = "Status_", menuName = "StudioScor/Attribute System/new Status")]
     public class StatusTag : ScriptableObject
     {
         [Header("[ Name ]")]

@@ -12,12 +12,13 @@ namespace StudioScor.StatusSystem
 
         private readonly StatusTag _Tag;
 
-        private float _MaxValue;
-        private float _CurrentValue;
-        private float _NormalizedValue;
-        private EStatusState _CurrentState;
+        private float _MaxValue = -1f;
+        private float _CurrentValue = -1f;
+        private float _NormalizedValue = -1f;
+        private EStatusState _CurrentState = EStatusState.None;
 
         public StatusTag Tag => _Tag;
+        public string Name => _Tag.Name;
         public float MaxValue => _MaxValue;
         public float CurrentValue => _CurrentValue;
         public float NormalizedValue => _NormalizedValue;
@@ -56,16 +57,7 @@ namespace StudioScor.StatusSystem
                 Callback_OnChangedMaxValue(prevMaxValue);
 
                 if (useRateChangeCurrentValue)
-                {
-                    if (_MaxValue > prevMaxValue)
-                    {
-                        SetCurrentValue(_CurrentValue * (_MaxValue / prevMaxValue));
-                    }
-                    else
-                    {
-                        SetCurrentValue(_CurrentValue * (prevMaxValue / _MaxValue));
-                    }
-                }
+                    SetCurrentValue(_CurrentValue * (_MaxValue / prevMaxValue));
             }
         }
         public void SetCurrentValue(float currentValue, ECalculateType calculateType = ECalculateType.Absolute)
@@ -90,13 +82,12 @@ namespace StudioScor.StatusSystem
                 {
                     TransitionState(EStatusState.Emptied);
                 }
-                else if (prevValue >= MaxValue || prevValue <= 0f)
+                else 
                 {
                     TransitionState(EStatusState.Consumed);
                 }
             }
         }
-
         private void TransitionState(EStatusState newStatusState)
         {
             if (newStatusState == CurrentState)
@@ -117,10 +108,10 @@ namespace StudioScor.StatusSystem
                 case ECalculateType.Absolute:
                     calcValue = value;
                     break;
-                case ECalculateType.RatioMaxValue:
+                case ECalculateType.RatioMax:
                     calcValue = value * MaxValue;
                     break;
-                case ECalculateType.RatioCurrentValue:
+                case ECalculateType.RatioCurrent:
                     calcValue = value * CurrentValue;
                     break;
                 default:
