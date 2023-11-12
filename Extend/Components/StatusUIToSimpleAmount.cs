@@ -26,7 +26,7 @@ namespace StudioScor.StatusSystem
             {
                 if(!gameObject.TryGetComponentInParentOrChildren(out _SImpleAmount))
                 {
-                    Log(" Simple Amount Is NULL!!", true);
+                    LogError(" Simple Amount Is NULL!!");
                 }
             }
         }
