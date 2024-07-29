@@ -5,59 +5,12 @@ using StudioScor.Utilities;
 
 namespace StudioScor.StatusSystem
 {
-    public delegate void StatusEventHandler(IStatusSystem statusSystem, Status status);
-    public delegate void ChangedStatusValueEventHandler(IStatusSystem statusSystem, Status status, float currentValue, float prevValue);
-    public delegate void ChangedStatusStateEventHander(IStatusSystem statusSystem, Status status, EStatusState currentState, EStatusState prevState);
-
-    public static class StatusSystemUtility
-    {
-        public static IStatusSystem GetStatusSystem(this GameObject gameObject)
-        {
-            return gameObject.GetComponent<IStatusSystem>();
-        }
-        public static IStatusSystem GetStatusSystem(this Transform transform)
-        {
-            return transform.GetComponent<IStatusSystem>();
-        }
-        public static IStatusSystem GetStatusSystem(this Component component)
-        {
-            var statusSystem = component as IStatusSystem;
-
-            if (statusSystem is not null)
-                return statusSystem;
-
-            return component.GetComponent<IStatusSystem>();
-        }
-        public static bool TryGetStatusSystem(this GameObject gameObject, out IStatusSystem statusSystem)
-        {
-            return gameObject.TryGetComponent(out statusSystem);
-        }
-        public static bool TryGetStatusSystem(this Transform transform, out IStatusSystem statusSystem)
-        {
-            return transform.TryGetComponent(out statusSystem);
-        }
-        public static bool TryGetStatusSystem(this Component component, out IStatusSystem statusSystem)
-        {
-            statusSystem = component as IStatusSystem;
-
-            if (statusSystem is not null)
-                return true;
-
-            return component.TryGetComponent(out statusSystem);
-        }
-
-        public static Status GetStatus(this IStatusSystem statusSystem, StatusTag statusTag)
-        {
-            return statusSystem.Statuses[statusTag];
-        }
-        public static bool TryGetStatus(this IStatusSystem statusSystem, StatusTag statusTag, out Status status)
-        {
-            return statusSystem.Statuses.TryGetValue(statusTag, out status);
-        }
-    }
-
     public interface IStatusSystem
     {
+        public delegate void StatusEventHandler(IStatusSystem statusSystem, Status status);
+        public delegate void ChangedStatusValueEventHandler(IStatusSystem statusSystem, Status status, float currentValue, float prevValue);
+        public delegate void ChangedStatusStateEventHander(IStatusSystem statusSystem, Status status, EStatusState currentState, EStatusState prevState);
+
         public GameObject gameObject { get; }
         public Transform transform { get; }
         public IReadOnlyDictionary<StatusTag, Status> Statuses { get; }
@@ -75,14 +28,15 @@ namespace StudioScor.StatusSystem
     public class StatusSystemComponent : BaseMonoBehaviour, IStatusSystem
     {
         [Header(" [ Status System Component ] ")]
-        [SerializeField] private InitializationStatuses _InitializationStatuses;
-        private readonly Dictionary<StatusTag, Status> _Statuses = new Dictionary<StatusTag, Status>();
-        public IReadOnlyDictionary<StatusTag, Status> Statuses => _Statuses;
+        [SerializeField] private InitializationStatuses _initializationStatuses;
+        private readonly Dictionary<StatusTag, Status> _statuses = new Dictionary<StatusTag, Status>();
+        public IReadOnlyDictionary<StatusTag, Status> Statuses => _statuses;
 
-        public event StatusEventHandler OnGrantedStatus;
-        public event ChangedStatusValueEventHandler OnChangedStatusValue;
-        public event ChangedStatusValueEventHandler OnChangedStatusMaxValue;
-        public event ChangedStatusStateEventHander OnChangedStatusState;
+        public event IStatusSystem.StatusEventHandler OnGrantedStatus;
+        public event IStatusSystem.ChangedStatusValueEventHandler OnChangedStatusValue;
+        public event IStatusSystem.ChangedStatusValueEventHandler OnChangedStatusMaxValue;
+        public event IStatusSystem.ChangedStatusStateEventHander OnChangedStatusState;
+
         private void Awake()
         {
             Setup();
@@ -105,10 +59,10 @@ namespace StudioScor.StatusSystem
         
         private void SetupInitializationStatuses()
         {
-            if (!_InitializationStatuses)
+            if (!_initializationStatuses)
                 return;
 
-            foreach (var initStatus in _InitializationStatuses.Statuses)
+            foreach (var initStatus in _initializationStatuses.Statuses)
             {
                 SetOrCreateStatus(initStatus.Tag, initStatus.MaxValue, initStatus.CurrentValue, initStatus.UseRate);
             }
@@ -143,7 +97,7 @@ namespace StudioScor.StatusSystem
         {
             var status = new Status(tag, maxValue, currentValue, useRate);
 
-            _Statuses.Add(tag, status);
+            _statuses.Add(tag, status);
 
             Callback_OnGrantedStatus(status);
 

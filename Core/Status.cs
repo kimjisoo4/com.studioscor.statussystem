@@ -10,19 +10,19 @@ namespace StudioScor.StatusSystem
         public delegate void StatusChangedStateHandler(Status status, EStatusState currentState, EStatusState prevState);
         #endregion
 
-        private readonly StatusTag _Tag;
+        private readonly StatusTag _tag;
 
-        private float _MaxValue = -1f;
-        private float _CurrentValue = -1f;
-        private float _NormalizedValue = -1f;
-        private EStatusState _CurrentState = EStatusState.None;
+        private float _maxValue = -1f;
+        private float _currentValue = -1f;
+        private float _normalizedValue = -1f;
+        private EStatusState _currentState = EStatusState.None;
 
-        public StatusTag Tag => _Tag;
-        public string Name => _Tag.Name;
-        public float MaxValue => _MaxValue;
-        public float CurrentValue => _CurrentValue;
-        public float NormalizedValue => _NormalizedValue;
-        public EStatusState CurrentState => _CurrentState;
+        public StatusTag Tag => _tag;
+        public string Name => _tag.Name;
+        public float MaxValue => _maxValue;
+        public float CurrentValue => _currentValue;
+        public float NormalizedValue => _normalizedValue;
+        public EStatusState CurrentState => _currentState;
 
         public event StatusChangedValueHandler OnChangedMaxValue;
         public event StatusChangedValueHandler OnChangedValue;
@@ -31,7 +31,7 @@ namespace StudioScor.StatusSystem
 
         public Status(StatusTag statusTag, float maxValue, float currentValue, bool useRate = false)
         {
-            _Tag = statusTag;
+            _tag = statusTag;
 
             float value = useRate ? maxValue * currentValue : currentValue;
 
@@ -47,31 +47,31 @@ namespace StudioScor.StatusSystem
 
         public void SetMaxValue(float maxValue, bool useRateValue = false, bool useRateChangeCurrentValue = false)
         {
-            float prevMaxValue = _MaxValue;
-            float newValue = useRateValue ? _MaxValue * maxValue : maxValue;
+            float prevMaxValue = _maxValue;
+            float newValue = useRateValue ? _maxValue * maxValue : maxValue;
 
-            _MaxValue = Mathf.Max(newValue, 0);
+            _maxValue = Mathf.Max(newValue, 0);
 
-            if (!_MaxValue.SafeEquals(prevMaxValue))
+            if (!_maxValue.SafeEquals(prevMaxValue))
             {
-                Callback_OnChangedMaxValue(prevMaxValue);
+                Invoke_OnChangedMaxValue(prevMaxValue);
 
                 if (useRateChangeCurrentValue)
-                    SetCurrentValue(_CurrentValue * (_MaxValue / prevMaxValue));
+                    SetCurrentValue(_currentValue * (_maxValue / prevMaxValue));
             }
         }
         public void SetCurrentValue(float currentValue, ECalculateType calculateType = ECalculateType.Absolute)
         {
-            float prevValue = _CurrentValue;
+            float prevValue = _currentValue;
             float newValue = CalculateValue(currentValue, calculateType);
 
-            _CurrentValue = Mathf.Clamp(newValue, 0, _MaxValue);
+            _currentValue = Mathf.Clamp(newValue, 0, _maxValue);
 
-            if (!_CurrentValue.SafeEquals(prevValue))
+            if (!_currentValue.SafeEquals(prevValue))
             {
-                _NormalizedValue = _CurrentValue / _MaxValue;
+                _normalizedValue = _currentValue / _maxValue;
 
-                Callback_OnChangedValue(prevValue);
+                Invoke_OnChangedValue(prevValue);
 
 
                 if (CurrentValue >= MaxValue)
@@ -94,9 +94,9 @@ namespace StudioScor.StatusSystem
                 return;
 
             var prevState = CurrentState;
-            _CurrentState = newStatusState;
+            _currentState = newStatusState;
 
-            Callback_OnChangedState(prevState);
+            Invoke_OnChangedState(prevState);
         }
 
         private float CalculateValue(float value, ECalculateType calculateType)
@@ -127,7 +127,7 @@ namespace StudioScor.StatusSystem
             if (addValue <= 0f)
                 return;
 
-            float value = _CurrentValue + CalculateValue(addValue, calculateType);
+            float value = _currentValue + CalculateValue(addValue, calculateType);
 
             SetCurrentValue(value);
         }
@@ -136,7 +136,7 @@ namespace StudioScor.StatusSystem
             if (subtractValue <= 0f)
                 return;
 
-            float value = _CurrentValue - CalculateValue(subtractValue, calculateType);
+            float value = _currentValue - CalculateValue(subtractValue, calculateType);
 
             SetCurrentValue(value);
         }
@@ -146,21 +146,21 @@ namespace StudioScor.StatusSystem
             if (subtractValue <= 0)
                 return true;
 
-            float value = _CurrentValue - CalculateValue(subtractValue, calculateType);
+            float value = _currentValue - CalculateValue(subtractValue, calculateType);
 
             return value >= 0f;
         }
 
-        #region Callback
-        protected void Callback_OnChangedValue(float prevValue)
+        #region Invoke
+        protected void Invoke_OnChangedValue(float prevValue)
         {
             OnChangedValue?.Invoke(this, CurrentValue, prevValue);
         }
-        protected void Callback_OnChangedMaxValue(float prevValue)
+        protected void Invoke_OnChangedMaxValue(float prevValue)
         {
             OnChangedMaxValue?.Invoke(this, MaxValue, prevValue);
         }
-        protected void Callback_OnChangedState(EStatusState prevState)
+        protected void Invoke_OnChangedState(EStatusState prevState)
         {
             OnChangedState?.Invoke(this, CurrentState, prevState);
         }

@@ -9,11 +9,11 @@ namespace StudioScor.StatusSystem
     public class StatusTag : ScriptableObject
     {
         [Header("[ Name ]")]
-        [SerializeField] private string _Name;
+        [SerializeField] private string _name;
         [Header("[ Description ]")]
-        [SerializeField] private string _Description;
+        [SerializeField] private string _description;
 
-        public string Name => _Name;
-        public string Description => _Description;
+        public string Name => _name;
+        public string Description => _description;
     }
 }
