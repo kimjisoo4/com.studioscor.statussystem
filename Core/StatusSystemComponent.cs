@@ -111,25 +111,25 @@ namespace StudioScor.StatusSystem
         #region Callback
         protected void Callback_OnGrantedStatus(Status status)
         {
-            Log($"On Granted Status - [ Status : {status.Name}]");
+            Log($"{nameof(OnGrantedStatus)} - [ Status : {status.Name}]");
 
             OnGrantedStatus?.Invoke(this, status);
         }
         protected void Callback_OnChangedStatusState(Status status, EStatusState currentState, EStatusState prevState)
         {
-            Log($"On Changed Status State - [ Status : {status.Name} | Current : {currentState} | Prev {prevState} ]");
+            Log($"{nameof(OnChangedStatusState)} - [ Status : {status.Name} | Current : {currentState} | Prev {prevState} ]");
             
             OnChangedStatusState?.Invoke(this, status, currentState, prevState);
         }
         protected void Callback_OnChangedStatusValue(Status status, float currentValue, float prevValue)
         {
-            Log($"On Changed Status Value - [ Status : {status.Name} | Current : {currentValue:N2} | Prev {prevValue:N2} ]");
+            Log($"{nameof(OnChangedStatusValue)}- [ Status : {status.Name} | Current : {currentValue:N2} | Prev {prevValue:N2} ]");
 
             OnChangedStatusValue?.Invoke(this, status, currentValue, prevValue);
         }
         protected void Callback_OnChangedStatusMaxValue(Status status, float currentValue, float prevValue)
         {
-            Log($"On Changed Status Max Value - [ Status : {status.Name} | Current : {currentValue:N2} | Prev {prevValue:N2} ]");
+            Log($"{nameof(OnChangedStatusMaxValue)} - [ Status : {status.Name} | Current : {currentValue:N2} | Prev {prevValue:N2} ]");
 
             OnChangedStatusMaxValue?.Invoke(this, status, currentValue, prevValue);
         }
