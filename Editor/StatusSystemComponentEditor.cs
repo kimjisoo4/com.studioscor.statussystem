@@ -1,18 +1,16 @@
-using UnityEngine;
-using UnityEditor;
-using StudioScor.Utilities;
 using StudioScor.Utilities.Editor;
+using UnityEditor;
+using UnityEngine;
 
 namespace StudioScor.StatusSystem.Editor
 {
-    
     [CustomEditor(typeof(StatusSystemComponent))]
     [CanEditMultipleObjects]
     public class StatusSystemComponentEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
+            DrawDefaultInspector();
 
             if (Application.isPlaying)
             {
@@ -46,7 +44,7 @@ namespace StudioScor.StatusSystem.Editor
                     foreach (var status in statuses)
                     {
                         GUILayout.BeginHorizontal();
-                        GUILayout.Label(status.Key.Name, normal);
+                        GUILayout.Label(status.Key.name, normal);
                         GUILayout.FlexibleSpace();
 
                         switch (status.Value.CurrentState)

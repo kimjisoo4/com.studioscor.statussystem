@@ -1,19 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace StudioScor.StatusSystem
 {
-
-    [CreateAssetMenu(fileName = "Status_", menuName = "StudioScor/Attribute System/new Status")]
+    [CreateAssetMenu(fileName = "Status_", menuName = "StudioScor/StatusSystem/new StatusTag")]
     public class StatusTag : ScriptableObject
     {
-        [Header("[ Name ]")]
-        [SerializeField] private string _name;
-        [Header("[ Description ]")]
-        [SerializeField] private string _description;
-
-        public string Name => _name;
-        public string Description => _description;
     }
 }

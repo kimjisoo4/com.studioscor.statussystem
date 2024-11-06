@@ -11,27 +11,26 @@ namespace StudioScor.StatusSystem
         #endregion
 
         private readonly StatusTag _tag;
-
         private float _maxValue = -1f;
         private float _currentValue = -1f;
         private float _normalizedValue = -1f;
         private EStatusState _currentState = EStatusState.None;
 
         public StatusTag Tag => _tag;
-        public string Name => _tag.Name;
         public float MaxValue => _maxValue;
         public float CurrentValue => _currentValue;
         public float NormalizedValue => _normalizedValue;
         public EStatusState CurrentState => _currentState;
+
 
         public event StatusChangedValueHandler OnChangedMaxValue;
         public event StatusChangedValueHandler OnChangedValue;
         public event StatusChangedStateHandler OnChangedState;
 
 
-        public Status(StatusTag statusTag, float maxValue, float currentValue, bool useRate = false)
+        public Status(StatusTag tag, float maxValue, float currentValue, bool useRate = false)
         {
-            _tag = statusTag;
+            _tag = tag;
 
             float value = useRate ? maxValue * currentValue : currentValue;
 

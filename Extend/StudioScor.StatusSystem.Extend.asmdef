@@ -1,6 +1,6 @@
 {
-    "name": "StudioScor.StatusSystem.VisualScripting",
-    "rootNamespace": "StudioScor.StatusSystem.VisualScripting",
+    "name": "StudioScor.StatusSystem.Extend",
+    "rootNamespace": "StudioScor.StatusSystem.Extend",
     "references": [
         "GUID:2684edc20ae38b74a968f6ccba58bd57",
         "GUID:0e56af4e027762c43b7508efc3b00495",
@@ -10,7 +10,9 @@
         "GUID:21b0c8d1703a94250bfac916590cea4f",
         "GUID:54cb1906aeb4e4264bc1d2aa3818a43f",
         "GUID:23f3c6063e13e4fd9addce3606ff4e42",
-        "GUID:f10496e9d78b943308af5e7e9e4543c8"
+        "GUID:f10496e9d78b943308af5e7e9e4543c8",
+        "GUID:753ebc295a2f30b4b87da5984eda45c2",
+        "GUID:73907d139b13f8a43b7e3e95c329d30a"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -24,6 +26,11 @@
             "name": "com.unity.visualscripting",
             "expression": "0.0.0",
             "define": "SCOR_ENABLE_VISUALSCRIPTING"
+        },
+        {
+            "name": "com.unity.behavior",
+            "expression": "1.0.3",
+            "define": "SCOR_ENABLE_BEHAVIOR"
         }
     ],
     "noEngineReferences": false

@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Label text="Initialization Statuses" />
+    <uie:PropertyField binding-path="_statuses" label="Statuses" />
+</ui:UXML>

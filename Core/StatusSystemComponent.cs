@@ -64,7 +64,7 @@ namespace StudioScor.StatusSystem
 
             foreach (var initStatus in _initializationStatuses.Statuses)
             {
-                SetOrCreateStatus(initStatus.Tag, initStatus.MaxValue, initStatus.CurrentValue, initStatus.UseRate);
+                SetOrCreateStatus(initStatus.Tag, initStatus.MaxValue, initStatus.CurrentValue, initStatus.UseRatio);
             }
         }
 
@@ -99,37 +99,37 @@ namespace StudioScor.StatusSystem
 
             _statuses.Add(tag, status);
 
-            Callback_OnGrantedStatus(status);
+            Invoke_OnGrantedStatus(status);
 
-            status.OnChangedValue += Callback_OnChangedStatusValue;
-            status.OnChangedMaxValue += Callback_OnChangedStatusMaxValue;
-            status.OnChangedState += Callback_OnChangedStatusState;
+            status.OnChangedValue += Invoke_OnChangedStatusValue;
+            status.OnChangedMaxValue += Invoke_OnChangedStatusMaxValue;
+            status.OnChangedState += Invoke_OnChangedStatusState;
 
             return status;
         }
 
-        #region Callback
-        protected void Callback_OnGrantedStatus(Status status)
+        #region Invoke
+        protected void Invoke_OnGrantedStatus(Status status)
         {
-            Log($"{nameof(OnGrantedStatus)} - [ Status : {status.Name}]");
+            Log($"{nameof(OnGrantedStatus)} - [ Status : {status.Tag}]");
 
             OnGrantedStatus?.Invoke(this, status);
         }
-        protected void Callback_OnChangedStatusState(Status status, EStatusState currentState, EStatusState prevState)
+        protected void Invoke_OnChangedStatusState(Status status, EStatusState currentState, EStatusState prevState)
         {
-            Log($"{nameof(OnChangedStatusState)} - [ Status : {status.Name} | Current : {currentState} | Prev {prevState} ]");
+            Log($"{nameof(OnChangedStatusState)} - [ Status : {status.Tag} | Current : {currentState} | Prev {prevState} ]");
             
             OnChangedStatusState?.Invoke(this, status, currentState, prevState);
         }
-        protected void Callback_OnChangedStatusValue(Status status, float currentValue, float prevValue)
+        protected void Invoke_OnChangedStatusValue(Status status, float currentValue, float prevValue)
         {
-            Log($"{nameof(OnChangedStatusValue)}- [ Status : {status.Name} | Current : {currentValue:N2} | Prev {prevValue:N2} ]");
+            Log($"{nameof(OnChangedStatusValue)}- [ Status : {status.Tag} | Current : {currentValue:N2} | Prev {prevValue:N2} ]");
 
             OnChangedStatusValue?.Invoke(this, status, currentValue, prevValue);
         }
-        protected void Callback_OnChangedStatusMaxValue(Status status, float currentValue, float prevValue)
+        protected void Invoke_OnChangedStatusMaxValue(Status status, float currentValue, float prevValue)
         {
-            Log($"{nameof(OnChangedStatusMaxValue)} - [ Status : {status.Name} | Current : {currentValue:N2} | Prev {prevValue:N2} ]");
+            Log($"{nameof(OnChangedStatusMaxValue)} - [ Status : {status.Tag} | Current : {currentValue:N2} | Prev {prevValue:N2} ]");
 
             OnChangedStatusMaxValue?.Invoke(this, status, currentValue, prevValue);
         }

@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Foldout text="StatusTag [ 0/0 (100%)]" name="Foldout" style="-unity-text-align: upper-left;">
+        <uie:ObjectField label="Status Tag" binding-path="Tag" type="StudioScor.StatusSystem.StatusTag, StudioScor.StatusSystem" name="ObjectField_StatusTag" />
+        <ui:FloatField label="Max Value" value="100" binding-path="MaxValue" name="FloatField_MaxValue" />
+        <ui:Toggle label="Use Ratio" binding-path="UseRatio" name="Toggle_UseRatio" />
+        <ui:Slider label="Current Value" value="42" binding-path="CurrentValue" high-value="10" name="Slider_CurrentValue" fill="true" show-input-field="true" />
+    </ui:Foldout>
+</ui:UXML>
