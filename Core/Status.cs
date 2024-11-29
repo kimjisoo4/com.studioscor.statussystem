@@ -68,23 +68,23 @@ namespace StudioScor.StatusSystem
 
             if (!_currentValue.SafeEquals(prevValue))
             {
-                _normalizedValue = _currentValue / _maxValue;
+                _normalizedValue = _currentValue.SafeDivide(_maxValue);
 
                 Invoke_OnChangedValue(prevValue);
 
-
-                if (CurrentValue >= MaxValue)
+                if (MaxValue > 0f && CurrentValue.SafeEquals(MaxValue))
                 {
                     TransitionState(EStatusState.Fulled);
                 }
-                else if (CurrentValue <= 0f)
+                else if (_currentValue.SafeEquals(0f))
                 {
                     TransitionState(EStatusState.Emptied);
                 }
-                else 
+                else
                 {
                     TransitionState(EStatusState.Consumed);
                 }
+
             }
         }
         private void TransitionState(EStatusState newStatusState)

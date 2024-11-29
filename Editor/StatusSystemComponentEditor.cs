@@ -59,7 +59,7 @@ namespace StudioScor.StatusSystem.Editor
                                 style = normal;
                                 break;
                         }
-
+                        GUILayout.Label(" [ " + status.Value.CurrentState.ToString() + " ] ", style);
                         GUILayout.Label(" [ " + status.Value.CurrentValue.ToString("N0") + " / " + status.Value.MaxValue.ToString("N0") + " ] ", style);
 
                         GUILayout.Space(10f);
